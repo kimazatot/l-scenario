@@ -57,7 +57,7 @@ function showPage(index) {
     if (index === pages.length - 1) {
         const finalText = document.getElementById("finalText");
         if (finalText && !finalText.dataset.typed) {
-            typeText(finalText, "Это только начало нашей книги...");
+            typeText(finalText, "Это только начало нашей истории...");
             finalText.dataset.typed = "true";
         }
     }
