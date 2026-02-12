@@ -391,3 +391,118 @@ button:disabled {
         opacity: 0;
     }
 }
+
+/* =====================================================
+   MOBILE REFINED
+===================================================== */
+@media (max-width: 768px) {
+
+    /* ---------------------------------
+       Общая структура
+    --------------------------------- */
+    body {
+        align-items: flex-start;
+        padding: 20px 0;
+    }
+
+    .book-wrapper {
+        padding: 10px;
+    }
+
+    /* ---------------------------------
+       Книга становится вертикальной
+    --------------------------------- */
+    .book {
+        width: 100%;
+        aspect-ratio: 3 / 4; /* вместо горизонтального */
+        border-radius: 16px;
+    }
+
+    /* Убираем боковую "тень переплета" */
+    .book::after {
+        display: none;
+    }
+
+    /* ---------------------------------
+       Страницы
+    --------------------------------- */
+    .page {
+        padding: 30px 20px 80px 20px; /* добавили место под кнопки */
+    }
+
+    /* ---------------------------------
+       Фото
+    --------------------------------- */
+    .photo,
+    .image-wrapper {
+        width: 85%;
+        max-width: 280px;
+    }
+
+    /* ---------------------------------
+       Контролы
+    --------------------------------- */
+    .controls {
+        position: fixed;
+        bottom: 10px;
+        left: 0;
+        width: 100%;
+        background: rgba(255,253,249,0.95);
+        padding: 10px 0;
+        backdrop-filter: blur(4px);
+    }
+
+    button {
+        padding: 12px 18px;
+        margin: 0 6px;
+        font-size: 14px;
+        min-height: 44px;
+    }
+
+    /* ---------------------------------
+       Reasons grid
+    --------------------------------- */
+    .reasons-grid {
+        grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+        gap: 14px;
+    }
+
+    .reason-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+    }
+
+    /* ---------------------------------
+       Modal
+    --------------------------------- */
+    .modal-content {
+        padding: 25px;
+        border-radius: 18px;
+    }
+
+    #modalReasonText {
+        font-size: 1.1rem;
+    }
+
+    /* ---------------------------------
+       Музыка
+    --------------------------------- */
+    .music-control {
+        top: 10px;
+        right: 10px;
+    }
+
+    #musicBtn {
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+
+}
+
+@media (max-width: 480px) {
+    .book {
+        aspect-ratio: auto;
+        min-height: 90vh;
+    }
+}
