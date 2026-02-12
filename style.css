@@ -291,38 +291,27 @@ button:disabled {
 
 /* Формируем сердце через псевдоэлементы */
 
-.heart::before,
-.heart::after {
-    content: "";
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    background: #e25572;
-    border-radius: 50%;
+.heart {
+    position: fixed;
+    top: -40px;
+    animation: fall linear infinite;
+    pointer-events: none;
+    background: none;
+    border: none;
+    will-change: transform, opacity;
 }
-
-.heart::before {
-    top: -8px;
-    left: 0;
-}
-
-.heart::after {
-    left: -8px;
-    top: 0;
-}
-
 
 @keyframes fall {
     0% {
-        transform: translateY(0) rotate(45deg);
-    }
-    50% {
-        transform: translateY(50vh) translateX(25px) rotate(200deg);
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.9;
     }
     100% {
-        transform: translateY(110vh) translateX(-25px) rotate(360deg);
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0.5;
     }
 }
+
 
 
 

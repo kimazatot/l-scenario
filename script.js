@@ -198,16 +198,25 @@ setInterval(() => {
     const heart = document.createElement("div");
     heart.className = "heart";
 
-    const size = 12 + Math.random() * 12;
+    const size = 15 + Math.random() * 25;
     heart.style.width = size + "px";
     heart.style.height = size + "px";
 
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = 5 + Math.random() * 5 + "s";
+    heart.style.position = "fixed";
+    heart.style.left     = Math.random() * 100 + "vw";
+
+    heart.style.animationDuration = (5 + Math.random() * 7) + "s";
+
+    heart.innerHTML = `
+        <svg viewBox="0 0 24 24" width="100%" height="100%">
+            <path fill="#e25572"
+            d="M12 21s-6.7-4.35-9.33-7.97C-0.07 9.58 1.6 5.5 5.5 5.5c2.04 0 3.4 1.16 4.1 2.27C10.6 6.66 11.96 5.5 14 5.5c3.9 0 5.57 4.08 2.83 7.53C18.7 16.65 12 21 12 21z"/>
+        </svg>
+    `;
 
     document.body.appendChild(heart);
 
-    setTimeout(() => heart.remove(), 10000);
+    setTimeout(() => heart.remove(), 13000);
 
-}, 700);
+}, 400);
 
