@@ -325,3 +325,80 @@ button:disabled {
     border-radius: 20px;
     padding: 40px;
 }
+/* Для новой плёнки – чуть меньше размер, если нужно */
+.memory-strip.new-strip .image-wrapper {
+    width: 90%;
+    max-width: 300px;
+    height: 60vw;
+    max-height: 380px;
+}
+
+/* Текст под новой плёнкой */
+.memory-text {
+    text-align: center;
+    max-width: 90%;
+    margin: 15px auto 0;
+}
+
+.memory-text h2 {
+    font-size: 28px;
+    color: #b0707f;
+    margin-bottom: 12px;
+}
+
+.memory-text p {
+    font-size: 18px;
+    line-height: 1.7;
+    color: #5f4b4b;
+}
+
+/* Адаптив для мобильных */
+@media (max-width: 768px) {
+    .memory-strip .image-wrapper {
+        width: 92%;
+        max-width: 280px;
+        height: 65vw;
+        max-height: 320px;
+    }
+
+    .memory-text h2 { font-size: 6.5vw; }
+    .memory-text p  { font-size: 4.4vw; }
+}
+
+/* Страница "11 сентября" – текстовая */
+.sept-text {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 10%;
+}
+
+.sept-text h2 {
+    font-size: 48px;
+    color: #c47b8b;
+    margin-bottom: 40px;
+}
+
+.sept-text .poetic {
+    font-size: 28px;
+    line-height: 1.8;
+    color: #5f4b4b;
+    font-style: italic;
+    margin-bottom: 30px;
+}
+
+.sept-text .small-note {
+    font-size: 20px;
+    color: #a67884;
+    opacity: 0.9;
+}
+
+/* Адаптив для этой страницы */
+@media (max-width: 768px) {
+    .sept-text h2 { font-size: 10vw; }
+    .sept-text .poetic { font-size: 5.5vw; line-height: 1.7; }
+    .sept-text .small-note { font-size: 4.5vw; }
+}

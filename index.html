@@ -2,9 +2,9 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Безмерная любовь</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -13,75 +13,93 @@
 <div class="book-wrapper">
     <div class="book">
 
-        <!-- 1 страница -->
+        <!-- Страница 1: Титульная -->
         <div class="page">
             <h1>Любовь длиною в жизнь</h1>
-            <img src="images/5393591111542505675.jpg" class="photo">
-            <p class="subtitle">Наша история</p>
+            <img src="images/5393591111542505675.jpg" class="photo" alt="Наша фотография">
+            <p class="subtitle">История нашей любви</p>
         </div>
 
-        <!-- 2 страница -->
+        <!-- Страница 2: Первая встреча -->
         <div class="page">
             <h2>Первая встреча</h2>
-            <img src="images/Снимок экрана от 2026-02-12 21-13-01.png" class="photo">
+            <img src="images/Снимок экрана от 2026-02-12 21-13-01.png" class="photo" alt="Момент первой встречи">
             <p>
-                Я до сих пор помню этот день, этот взгляд полный вопросами,
-                и я поняла — что-то изменилось,
+                Я до сих пор помню этот день,<br>
+                этот взгляд полный вопросами,<br>
+                и я поняла — что-то изменилось,<br>
                 что наши души связаны впредь.
             </p>
         </div>
 
-        <!-- 3 страница (ФОТОПЛЁНКА) -->
+        <!-- Страница 3: Фотоплёнка «Лучшие друзья» (старая, 4 фото) -->
         <div class="page">
-            <div class="memory-strip">
-
+            <div class="memory-strip old-strip">
                 <div class="image-wrapper">
-                    <img src="images/5431728771863530492.jpg" class="memory-photo active">
-                    <img src="images/5280602157051136784.jpg" class="memory-photo">
-                    <img src="images/5380070017623772702.jpg" class="memory-photo">
-                    <img src="images/5280602157051136749.jpg" class="memory-photo">
-
-
-
-                    <button id="memoryNext" class="memory-btn">→</button>
+                    <img src="images/5431728771863530492.jpg" class="memory-photo active" alt="Фото 1">
+                    <img src="images/5280602157051136784.jpg" class="memory-photo" alt="Фото 2">
+                    <img src="images/5380070017623772702.jpg" class="memory-photo" alt="Фото 3">
+                    <img src="images/5280602157051136749.jpg" class="memory-photo" alt="Фото 4">
                 </div>
 
                 <div class="memory-text">
-                    <h2 id="memoryTitle">Лучшие друзья</h2>
-                    <p id="memoryDesc">
+                    <h2 id="memoryTitleOld">Лучшие друзья</h2>
+                    <p id="memoryDescOld">
                         Всё началось с простого общения...
                     </p>
                 </div>
-
             </div>
         </div>
-
-
         <div class="page">
             <div class="wanderings">
-                <h2>И вдруг..</h2>
+                <h2>И вдруг...</h2>
                 <p>
-                    Мы не заметили, как вдруг..<br>
+                    Мы не заметили, как вдруг...<br>
                     мир стал безмолвно глух,<br>
-                    и руки сомкнулись без чувств
+                    и руки сомкнулись без чувств.
                 </p>
             </div>
         </div>
 
-
-
-        <!-- 4 страница -->
+        <!-- Страница 5: 11 сентября – текст и возвращение -->
         <div class="page">
-            <img src="images/photo3.jpg" class="photo">
-            <h2>Сегодня</h2>
-            <p>
-                Я выбираю тебя.<br>
-                Снова и снова.<br>
-                Каждый день.
-            </p>
+            <div class="sept-text">
+                <h2>11 сентября</h2>
+                <p class="poetic">
+                    О чудо — вернулись мы вновь,<br>
+                    сквозь годы молчаний и мучений.<br>
+                    И стали мы тише, но ближе прежнего…
+                </p>
+                <p class="small-note">
+                    В этот день всё стало на свои места.
+                </p>
+            </div>
         </div>
 
-        <!-- 5 страница -->
+        <!-- Страница 6: Фотоплёнка 11 сентября (8 фото) -->
+        <div class="page">
+            <div class="memory-strip new-strip">
+                <div class="image-wrapper">
+                    <img src="images/5224475408466644211.jpg" class="memory-photo active" alt="">
+                    <img src="images/5350684259406444557.jpg" class="memory-photo" alt="">
+                    <img src="images/5357446161427988955.jpg" class="memory-photo" alt="">
+                    <img src="images/5454276315080424419.jpg" class="memory-photo" alt="">
+                    <img src="images/5390960512796920637.jpg" class="memory-photo" alt="">
+                    <img src="images/5220144397805098920.jpg" class="memory-photo" alt="">
+                    <img src="images/5384393344592579370.jpg" class="memory-photo" alt="">
+                    <img src="images/5445108505527391108.jpg" class="memory-photo" alt="">
+                </div>
+
+                <div class="memory-text">
+                    <h2 id="memoryTitleNew">Возвращение</h2>
+                    <p id="memoryDescNew">
+                        11 сентября — день, когда мы снова стали единым целым...
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Страница 7: Финал -->
         <div class="page final-page">
             <h1>Продолжим писать эту историю вместе?</h1>
             <p id="finalText">
@@ -89,10 +107,10 @@
             </p>
         </div>
 
-        <!-- Управление -->
+        <!-- Управление книгой -->
         <div class="controls">
             <button id="prevBtn">Назад</button>
-            <span id="pageIndicator">1 / 5</span>
+            <span id="pageIndicator">1 / 6</span>
             <button id="nextBtn">Далее</button>
         </div>
 
@@ -104,9 +122,9 @@
     </div>
 </div>
 
-<!-- Аудио -->
-<audio id="pageSound" src="page-flip.mp3"></audio>
-<audio id="music" src="music.mp3" loop></audio>
+<!-- Звуки -->
+<audio id="pageSound" src="page-flip.mp3" preload="auto"></audio>
+<audio id="music" src="music.mp3" loop preload="auto"></audio>
 
 <script src="script.js"></script>
 </body>

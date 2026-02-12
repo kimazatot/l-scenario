@@ -54,7 +54,6 @@ function showPage(index) {
 
     updateIndicator();
 
-    // Печатающийся текст на последней странице
     if (index === pages.length - 1) {
         const finalText = document.getElementById("finalText");
         if (finalText && !finalText.dataset.typed) {
@@ -70,8 +69,7 @@ function typeText(element, text, speed = 35) {
 
     const interval = setInterval(() => {
         if (i < text.length) {
-            element.textContent += text[i];
-            i++;
+            element.textContent += text[i++];
         } else {
             clearInterval(interval);
         }
@@ -105,44 +103,79 @@ if (bookPrevBtn) {
 
 
 // ======================================================
-// ФОТОПЛЁНКА — переключение по клику на фото
+// СТАРАЯ ФОТОПЛЁНКА (4 фото)
 // ======================================================
 
-const photos = document.querySelectorAll(".memory-photo");
-const memoryTitle = document.getElementById("memoryTitle");
-const memoryDesc = document.getElementById("memoryDesc");
+const photosOld = document.querySelectorAll(".memory-strip.old-strip .memory-photo");
+const memoryTitleOld = document.getElementById("memoryTitleOld");
+const memoryDescOld  = document.getElementById("memoryDescOld");
 
-const memories = [
+const memoriesOld = [
     { title: "Лучшие друзья",          text: "Всё началось с простого общения..." },
     { title: "Первый смех",            text: "Мы смеялись так, будто знали друг друга всю жизнь." },
     { title: "Первые прогулки",        text: "Тёплый вечер и ощущение, что мир стал другим." },
     { title: "Нечто большее",          text: "И тогда я поняла — это уже не просто дружба." }
 ];
 
-let currentMemory = 0;
+let currentMemoryOld = 0;
 
-function updateMemoryDisplay() {
-    if (photos.length === 0) return;
-
-    photos.forEach((photo, i) => {
-        photo.classList.toggle("active", i === currentMemory);
-    });
-
-    if (memories[currentMemory]) {
-        memoryTitle.textContent = memories[currentMemory].title;
-        memoryDesc.textContent = memories[currentMemory].text;
+function updateOldMemory() {
+    if (photosOld.length === 0) return;
+    photosOld.forEach((p, i) => p.classList.toggle("active", i === currentMemoryOld));
+    if (memoriesOld[currentMemoryOld]) {
+        memoryTitleOld.textContent = memoriesOld[currentMemoryOld].title;
+        memoryDescOld.textContent  = memoriesOld[currentMemoryOld].text;
     }
 }
 
-const imageWrapper = document.querySelector(".image-wrapper");
+const wrapperOld = document.querySelector(".memory-strip.old-strip .image-wrapper");
 
-if (imageWrapper && photos.length > 0) {
-    // Показываем первое фото сразу
-    updateMemoryDisplay();
+if (wrapperOld && photosOld.length > 0) {
+    updateOldMemory();
+    wrapperOld.addEventListener("click", () => {
+        currentMemoryOld = (currentMemoryOld + 1) % photosOld.length;
+        updateOldMemory();
+    });
+}
 
-    imageWrapper.addEventListener("click", () => {
-        currentMemory = (currentMemory + 1) % photos.length;
-        updateMemoryDisplay();
+
+// ======================================================
+// НОВАЯ ФОТОПЛЁНКА (8 фото)
+// ======================================================
+
+const photosNew = document.querySelectorAll(".memory-strip.new-strip .memory-photo");
+const memoryTitleNew = document.getElementById("memoryTitleNew");
+const memoryDescNew  = document.getElementById("memoryDescNew");
+
+const memoriesNew = [
+    { title: "Возвращение",          text: "О чудо — вернулись мы вновь..." },
+    { title: "Сквозь молчание",      text: "Годы тишины только усилили чувства." },
+    { title: "Ближе прежнего",       text: "Мы стали тише, но связь крепче." },
+    { title: "Осенний взгляд",       text: "Твой взгляд говорит больше слов." },
+    { title: "Тепло рук",            text: "Одно прикосновение — и всё на месте." },
+    { title: "Момент истины",        text: "11 сентября — день, когда мы выбрали нас." },
+    { title: "Тишина вдвоём",        text: "Вместе даже молчание звучит красиво." },
+    { title: "Навсегда теперь",      text: "Это не конец, а настоящее начало." }
+];
+
+let currentMemoryNew = 0;
+
+function updateNewMemory() {
+    if (photosNew.length === 0) return;
+    photosNew.forEach((p, i) => p.classList.toggle("active", i === currentMemoryNew));
+    if (memoriesNew[currentMemoryNew]) {
+        memoryTitleNew.textContent = memoriesNew[currentMemoryNew].title;
+        memoryDescNew.textContent  = memoriesNew[currentMemoryNew].text;
+    }
+}
+
+const wrapperNew = document.querySelector(".memory-strip.new-strip .image-wrapper");
+
+if (wrapperNew && photosNew.length > 0) {
+    updateNewMemory();
+    wrapperNew.addEventListener("click", () => {
+        currentMemoryNew = (currentMemoryNew + 1) % photosNew.length;
+        updateNewMemory();
     });
 }
 
@@ -165,24 +198,27 @@ if (musicBtn && music) {
 
 
 // ======================================================
-function startHearts() {
-    console.log("startHearts запущена"); // ← должно появиться в консоли!
+// ПАДАЮЩИЕ СЕРДЕЧКИ
+// ======================================================
 
-    const intervalMs = window.innerWidth < 768 ? 1200 : 600;
+function startHearts() {
+    const isMobile = window.innerWidth < 768;
+    const intervalMs = isMobile ? 1200 : 600;
+    const maxHearts = isMobile ? 12 : 22;
 
     setInterval(() => {
-        console.log("Создаю новое сердечко"); // ← каждые 600–1200 мс
+        if (document.querySelectorAll(".heart").length >= maxHearts) return;
 
         const heart = document.createElement("div");
         heart.className = "heart";
 
-        const size = 18 + Math.random() * 22;
-        heart.style.width = size + "px";
-        heart.style.height = size + "px";
+        const size = isMobile ? 14 + Math.random() * 18 : 18 + Math.random() * 24;
+        heart.style.width = `${size}px`;
+        heart.style.height = `${size}px`;
 
-        heart.style.left = (Math.random() * 90 + 5) + "vw"; // чуть отступ от краёв
+        heart.style.left = `${Math.random() * 92 + 4}vw`;
 
-        const duration = 5 + Math.random() * 6;
+        const duration = 5 + Math.random() * 7;
         heart.style.animation = `fall ${duration}s linear forwards`;
 
         heart.innerHTML = `<svg viewBox="0 0 24 24" width="100%" height="100%">
@@ -191,16 +227,9 @@ function startHearts() {
 
         document.body.appendChild(heart);
 
-        setTimeout(() => {
-            heart.remove();
-            console.log("Сердечко удалено");
-        }, duration * 1000 + 500);
+        setTimeout(() => heart.remove(), duration * 1200);
 
     }, intervalMs);
 }
 
-// Запуск
-window.addEventListener('load', () => {
-    console.log("Страница загружена, запускаем сердечки");
-    startHearts();
-});
+window.addEventListener('load', startHearts);
