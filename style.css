@@ -1,0 +1,160 @@
+/* ===== БАЗА ===== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Georgia', serif;
+    background: linear-gradient(135deg, #fdf6f6, #f9f3ef);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* ===== ОБЁРТКА ===== */
+
+.book-wrapper {
+    perspective: 2000px;
+}
+
+/* ===== КНИГА ===== */
+
+.book {
+    width: 850px;
+    height: 620px;
+    position: relative;
+    background: #fffdf9;
+    border-radius: 20px;
+    box-shadow: 
+        0 20px 50px rgba(180, 150, 150, 0.25),
+        inset 0 0 30px rgba(0,0,0,0.03);
+    overflow: hidden;
+}
+
+/* ===== СТРАНИЦЫ ===== */
+
+.page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 90px 100px;
+    opacity: 0;
+    transform: translateX(30px);
+    transition: all 0.7s ease;
+    overflow-y: auto;
+}
+
+.page.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* ===== ТЕКСТ ===== */
+
+.page h1 {
+    font-size: 46px;
+    margin-bottom: 25px;
+    color: #c47b8b;
+    text-align: center;
+    font-weight: 500;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 20px;
+    color: #b58c8c;
+    letter-spacing: 2px;
+}
+
+.page h2 {
+    font-size: 30px;
+    margin-bottom: 20px;
+    color: #b0707f;
+    text-align: center;
+}
+
+.page p {
+    font-size: 21px;
+    line-height: 1.9;
+    color: #5f4b4b;
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* ===== ФОТО ===== */
+
+.photo {
+    width: 320px;
+    border-radius: 18px;
+    display: block;
+    margin: 30px auto;
+    box-shadow: 0 15px 35px rgba(180,150,150,0.25);
+    transition: transform 0.5s ease;
+}
+
+.photo:hover {
+    transform: scale(1.04);
+}
+
+/* ===== КНОПКИ ===== */
+
+.controls {
+    position: absolute;
+    bottom: 30px;
+    width: 100%;
+    text-align: center;
+}
+
+button {
+    padding: 12px 32px;
+    margin: 0 20px;
+    border: none;
+    border-radius: 40px;
+    background: #d8a5b0;
+    color: white;
+    font-size: 16px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: #c98795;
+    transform: translateY(-2px);
+}
+
+/* ===== ФИНАЛ ===== */
+
+.final-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.final-page h1 {
+    font-size: 44px;
+    color: #d17b94;
+}
+
+.final-page p {
+    font-size: 22px;
+    margin-top: 15px;
+}
+
+/* ===== АНИМАЦИЯ ===== */
+
+.page p,
+.page h1,
+.page h2,
+.photo {
+    animation: fadeIn 1.2s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
