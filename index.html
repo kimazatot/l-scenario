@@ -13,15 +13,15 @@
 <div class="book-wrapper">
     <div class="book">
 
-        <!-- Страница 1: Титульная -->
-        <div class="page">
+        <!-- Страница 1 -->
+        <div class="page centered-page">
             <h1>Любовь длиною в жизнь</h1>
             <img src="images/5393591111542505675.jpg" class="photo" alt="Наша фотография">
             <p class="subtitle">История нашей любви</p>
         </div>
 
-        <!-- Страница 2: Первая встреча -->
-        <div class="page">
+        <!-- Страница 2 -->
+        <div class="page centered-page">
             <h2>Первая встреча</h2>
             <img src="images/Снимок экрана от 2026-02-12 21-13-01.png" class="photo" alt="Момент первой встречи">
             <p>
@@ -32,14 +32,14 @@
             </p>
         </div>
 
-        <!-- Страница 3: Фотоплёнка «Лучшие друзья» (старая, 4 фото) -->
-        <div class="page">
+        <!-- Страница 3 -->
+        <div class="page centered-page">
             <div class="memory-strip old-strip">
                 <div class="image-wrapper">
-                    <img src="images/5431728771863530492.jpg" class="memory-photo active" alt="Фото 1">
-                    <img src="images/5280602157051136784.jpg" class="memory-photo" alt="Фото 2">
-                    <img src="images/5380070017623772702.jpg" class="memory-photo" alt="Фото 3">
-                    <img src="images/5280602157051136749.jpg" class="memory-photo" alt="Фото 4">
+                    <img src="images/5431728771863530492.jpg" class="memory-photo active" alt="">
+                    <img src="images/5280602157051136784.jpg" class="memory-photo" alt="">
+                    <img src="images/5380070017623772702.jpg" class="memory-photo" alt="">
+                    <img src="images/5280602157051136749.jpg" class="memory-photo" alt="">
                 </div>
 
                 <div class="memory-text">
@@ -50,7 +50,9 @@
                 </div>
             </div>
         </div>
-        <div class="page">
+
+        <!-- Страница 4 -->
+        <div class="page centered-page">
             <div class="wanderings">
                 <h2>И вдруг...</h2>
                 <p>
@@ -61,8 +63,8 @@
             </div>
         </div>
 
-        <!-- Страница 5: 11 сентября – текст и возвращение -->
-        <div class="page">
+        <!-- Страница 5 -->
+        <div class="page centered-page">
             <div class="sept-text">
                 <h2>11 сентября</h2>
                 <p class="poetic">
@@ -76,8 +78,8 @@
             </div>
         </div>
 
-        <!-- Страница 6: Фотоплёнка 11 сентября (8 фото) -->
-        <div class="page">
+        <!-- Страница 6 -->
+        <div class="page centered-page">
             <div class="memory-strip new-strip">
                 <div class="image-wrapper">
                     <img src="images/5224475408466644211.jpg" class="memory-photo active" alt="">
@@ -99,11 +101,11 @@
             </div>
         </div>
 
-
+        <!-- Страница 7 (Love Reasons) -->
         <div class="page love-reasons-page">
-            <h1>А знаешь, <br> за что я тебя люблю?</h1>
-            
-            <div class="reasons-grid">
+            <h1>А знаешь,<br>за что я тебя люблю?</h1>
+
+             <div class="reasons-grid">
                 <button class="reason-btn" data-reason="0">♥</button>
                 <button class="reason-btn" data-reason="1">♥</button>
                 <button class="reason-btn" data-reason="2">♥</button>
@@ -155,31 +157,24 @@
                 <button class="reason-btn" data-reason="48">♥</button>
                 <button class="reason-btn" data-reason="49">♥</button>
             </div>
-
-        <div id="reasonModal" class="reason-modal">
-        <div class="modal-content">
-            <button class="modal-close">×</button>
-            <p id="modalReasonText"></p>
         </div>
-    </div>
-</div>
 
-        <!-- Страница 7: Финал -->
-        <div class="page final-page">
+        <!-- Страница 8 (Финал) -->
+        <div class="page final-page centered-page">
             <h1>Продолжим писать эту книгу вместе?</h1>
             <p id="finalText">
                 Это только начало нашей истории...
             </p>
         </div>
 
-        <!-- Управление книгой -->
+        <!-- Управление -->
         <div class="controls">
             <button id="prevBtn">Назад</button>
-            <span id="pageIndicator">1 / 6</span>
+            <span id="pageIndicator">1 / 8</span>
             <button id="nextBtn">Далее</button>
         </div>
 
-        <!-- Кнопка музыки -->
+        <!-- Музыка -->
         <div class="music-control">
             <button id="musicBtn">Музыка</button>
         </div>
@@ -187,7 +182,15 @@
     </div>
 </div>
 
-<!-- Звуки -->
+<!-- Модальное окно вне книги -->
+<div id="reasonModal" class="reason-modal">
+    <div class="modal-content">
+        <button class="modal-close">×</button>
+        <p id="modalReasonText"></p>
+    </div>
+</div>
+
+<!-- Аудио -->
 <audio id="music" src="audio/Winter_Aid_-_The_Wisp_Sings_(Bib.fm).mp3" loop preload="auto"></audio>
 
 <script src="script.js"></script>

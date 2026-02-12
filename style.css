@@ -1,5 +1,5 @@
 /* =====================================================
-   БАЗА
+   BASE
 ===================================================== */
 * {
     box-sizing: border-box;
@@ -7,27 +7,42 @@
     padding: 0;
 }
 
+html, body {
+    overflow-x: clip;
+}
+
 body {
     font-family: 'Georgia', serif;
     background: linear-gradient(135deg, #fdf6f6, #f9f3ef);
     min-height: 100dvh;
-    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* =====================================================
-   ОБЁРТКА КНИГИ
+   BOOK WRAPPER
 ===================================================== */
 .book-wrapper {
     perspective: 2500px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
 }
 
+/* =====================================================
+   BOOK (АДАПТИВНАЯ ГЕОМЕТРИЯ)
+===================================================== */
 .book {
-    width: 850px;
-    height: 620px;
+    width: min(90vw, 850px);
+    aspect-ratio: 850 / 620;
     position: relative;
     background: #fffdf9;
     border-radius: 20px;
-    box-shadow: 0 20px 50px rgba(180,150,150,0.25), inset 0 0 30px rgba(0,0,0,0.03);
+    box-shadow:
+        0 20px 50px rgba(180,150,150,0.25),
+        inset 0 0 30px rgba(0,0,0,0.03);
     overflow: hidden;
     transform-style: preserve-3d;
 }
@@ -44,28 +59,38 @@ body {
 }
 
 /* =====================================================
-   СТРАНИЦЫ
+   PAGES
 ===================================================== */
 .page {
     position: absolute;
     inset: 0;
-    padding: 90px 100px 80px;
+    padding: clamp(30px, 6vw, 90px) clamp(25px, 6vw, 100px);
     background: #fffdf9;
     transform-origin: left center;
     backface-visibility: hidden;
     transition: transform 0.9s cubic-bezier(.65,.05,.36,1);
     overflow-y: auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
+.centered-page {
+    justify-content: center;
+}
+
+
 
 .page.flipped {
     transform: rotateY(-180deg);
 }
 
 /* =====================================================
-   ТЕКСТ
+   TEXT
 ===================================================== */
 .page h1 {
-    font-size: 46px;
+    font-size: clamp(2rem, 4vw, 46px);
     margin-bottom: 25px;
     color: #c47b8b;
     text-align: center;
@@ -74,31 +99,31 @@ body {
 
 .subtitle {
     text-align: center;
-    font-size: 20px;
+    font-size: clamp(1rem, 2vw, 20px);
     color: #b58c8c;
     letter-spacing: 2px;
 }
 
 .page h2 {
-    font-size: 30px;
+    font-size: clamp(1.5rem, 3vw, 30px);
     margin-bottom: 20px;
     color: #b0707f;
     text-align: center;
 }
 
 .page p {
-    font-size: 21px;
-    line-height: 1.9;
+    font-size: clamp(1rem, 2.3vw, 21px);
+    line-height: 1.8;
     color: #5f4b4b;
     margin-top: 20px;
     text-align: center;
 }
 
 /* =====================================================
-   ФОТО
+   PHOTO
 ===================================================== */
 .photo {
-    width: 320px;
+    width: min(70%, 320px);
     border-radius: 18px;
     display: block;
     margin: 30px auto;
@@ -111,7 +136,7 @@ body {
 }
 
 /* =====================================================
-   ФОТОПЛЁНКА
+   MEMORY STRIP
 ===================================================== */
 .memory-strip {
     display: flex;
@@ -124,8 +149,8 @@ body {
 
 .image-wrapper {
     position: relative;
-    width: 320px;
-    height: 420px;
+    width: min(70%, 320px);
+    aspect-ratio: 3 / 4;
     cursor: pointer;
 }
 
@@ -145,14 +170,14 @@ body {
 }
 
 /* =====================================================
-   КНОПКИ НАВИГАЦИИ
+   NAV CONTROLS
 ===================================================== */
 .controls {
     position: absolute;
-    bottom: 30px;
+    bottom: 20px;
     width: 100%;
     text-align: center;
-    z-index: 1000;
+    z-index: 10;
 }
 
 button {
@@ -183,7 +208,7 @@ button:disabled {
 }
 
 /* =====================================================
-   ФИНАЛЬНАЯ СТРАНИЦА
+   FINAL PAGE
 ===================================================== */
 .final-page {
     display: flex;
@@ -193,120 +218,93 @@ button:disabled {
 }
 
 .final-page h1 {
-    font-size: 44px;
+    font-size: clamp(2rem, 4vw, 44px);
     color: #d17b94;
 }
 
 .final-page p {
-    font-size: 22px;
+    font-size: clamp(1rem, 2vw, 22px);
     margin-top: 15px;
 }
 
 /* =====================================================
-   КНОПКА МУЗЫКИ
+   MUSIC BUTTON
 ===================================================== */
 .music-control {
     position: absolute;
     top: 20px;
     right: 20px;
-    z-index: 1000;
+    z-index: 100;
 }
 
 #musicBtn {
-    padding: 12px 28px;
+    padding: 10px 24px;
     border: none;
     border-radius: 50px;
     background: #d8a5b0;
     color: white;
-    font-size: 16px;
+    font-size: 14px;
     cursor: pointer;
     transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 8px;
 }
 
 #musicBtn:hover {
     background: #c98795;
-    transform: translateY(-2px);
 }
 
 #musicBtn.playing {
     background: #ff6b81;
 }
 
-#musicIcon {
-    font-size: 1.3rem;
-    font-weight: bold;
-}
-
 /* =====================================================
-   ПАДАЮЩИЕ СЕРДЕЧКИ
-===================================================== */
-.heart {
-    position: fixed;
-    top: -60px;
-    pointer-events: none;
-    will-change: transform, opacity;
-    z-index: 9999;
-}
-
-@keyframes fall {
-    0%   { transform: translateY(0) rotate(0deg); opacity: 0.95; }
-    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
-}
-
-/* =====================================================
-   СТРАНИЦА "А знаешь, за что я тебя люблю?"
+   LOVE REASONS PAGE
 ===================================================== */
 .love-reasons-page {
-    display: flex;
+    /* display: flex; */
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
     text-align: center;
-    padding: clamp(40px, 8vh, 80px) clamp(12px, 4vw, 32px) clamp(30px, 6vh, 60px);
-    min-height: 100%;
+    padding-top: 40px;
+    min-height: auto;
+    position: relative;
+    z-index: 2;
+    margin-top: 10px;
+    height: 100%;
+
 }
 
-.love-reasons-page h1 {
-    font-size: clamp(2.2rem, 7vw, 3.4rem);
-    color: #d17b94;
-    margin: 0 0 clamp(30px, 6vh, 50px);
-    line-height: 1.25;
-}
-
-/* Сетка сердечек */
 .reasons-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(60px, 80px));
-    gap: 24px 28px;
+    grid-template-columns: repeat(auto-fit, minmax(55px, 75px));
+    gap: 20px;
     width: 100%;
-    max-width: 1100px;
-    margin: 0 auto 5vh;
-    padding: 0 20px;
-    box-sizing: border-box;
+    max-width: 1000px;
+    margin: 30px auto;
     justify-content: center;
 }
 
 .reason-btn {
-    width: 70px;
-    height: 70px;
+    width: 65px;
+    height: 65px;
     border-radius: 50%;
     background: #fff0f5;
-    border: 2.5px solid #ffd1dc;
-    font-size: 2.2rem;
+    border: 2px solid #ffd1dc;
+    font-size: 1.8rem;
     color: #ff6b81;
     cursor: pointer;
-    transition: all 0.35s ease;
-    box-shadow: 0 4px 12px rgba(255,107,129,0.18);
+    transition: all 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    line-height: 1;
 }
 
-/* Модальное окно */
+.reason-btn:hover {
+    transform: scale(1.1);
+}
+
+/* =====================================================
+   MODAL
+===================================================== */
 .reason-modal {
     display: none;
     position: fixed;
@@ -324,127 +322,72 @@ button:disabled {
 
 .modal-content {
     background: #fffdf9;
-    padding: clamp(30px, 6vw, 50px) clamp(25px, 5vw, 45px);
+    padding: 40px;
     border-radius: 24px;
     width: 90%;
-    max-width: 620px;
+    max-width: 600px;
     max-height: 85vh;
     overflow-y: auto;
     box-shadow: 0 20px 70px rgba(200,100,120,0.45);
-    animation: modalAppear 0.45s ease-out;
-}
-
-.modal-close {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    background: none;
-    border: none;
-    font-size: clamp(2.2rem, 6vw, 3rem);
-    color: #c47b8b;
-    cursor: pointer;
-    transition: transform 0.3s;
-}
-
-.modal-close:hover {
-    transform: rotate(90deg) scale(1.1);
 }
 
 #modalReasonText {
-    font-size: clamp(1.3rem, 4.5vw, 1.8rem);
-    line-height: 1.65;
-    color: #4a3c3c;
+    font-size: 1.4rem;
+    line-height: 1.6;
     text-align: center;
-    font-style: italic;
-    padding: 0 10px;
-}
-
-@keyframes modalAppear {
-    from { transform: scale(0.75) translateY(30px); opacity: 0; }
-    to   { transform: scale(1) translateY(0); opacity: 1; }
+    color: #4a3c3c;
 }
 
 /* =====================================================
-   АДАПТИВ
+   MOBILE
 ===================================================== */
 @media (max-width: 768px) {
-    body { min-height: 100dvh; }
 
-    .book-wrapper { perspective: 1800px; }
+    body {
+        align-items: flex-start;
+    }
+
+    .book-wrapper {
+        padding: 20px 10px;
+    }
 
     .book {
-        width: 94vw;
-        max-width: 420px;
-        height: 90dvh;
-        max-height: 780px;
+        width: 95vw;
     }
 
-    .page { padding: 6vw 7vw; }
-
-    .photo { width: 78%; max-width: 280px; margin: 4vw auto; }
-
-    h1 { font-size: 8.5vw; margin-bottom: 4vw; }
-    h2 { font-size: 6.8vw; margin-bottom: 3.5vw; }
-    p  { font-size: 4.6vw; line-height: 1.75; }
-
-    .love-reasons-page {
-        padding: 2vh 5vw 5vh;
+    .controls {
+        bottom: 10px;
     }
 
-    .love-reasons-page h1 {
-        font-size: 9vw;
-        margin-bottom: 4vh;
-    }
-
-    .reasons-grid {
-        grid-template-columns: repeat(auto-fit, minmax(45px, 55px));
-        gap: 16px 18px;
-        padding: 0 12px;
-        max-width: 98vw;
+    button {
+        padding: 10px 20px;
+        margin: 0 10px;
+        font-size: 14px;
     }
 
     .reason-btn {
         width: 55px;
         height: 55px;
-        font-size: 1.8rem;
-    }
-
-    .modal-content {
-        padding: 35px 25px;
-        width: 95%;
-        max-height: 90vh;
-    }
-
-    #modalReasonText {
-        font-size: 1.45rem;
-    }
-
-    .music-control {
-        top: 15px;
-        right: 15px;
-    }
-
-    #musicBtn {
-        padding: 10px 20px;
-        font-size: 14px;
+        font-size: 1.5rem;
     }
 }
 
-@media (max-width: 480px) {
-    .reasons-grid {
-        grid-template-columns: repeat(auto-fit, minmax(42px, 50px));
-        gap: 12px 14px;
-        padding: 0 10px;
-    }
+.heart {
+    position: fixed;
+    top: -60px;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    animation: fall linear forwards;
+}
 
-    .reason-btn {
-        width: 50px;
-        height: 50px;
-        font-size: 1.6rem;
+@keyframes fall {
+    from {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
     }
-
-    .modal-content {
-        padding: 30px 20px;
-        width: 96%;
+    to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
     }
 }
