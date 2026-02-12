@@ -514,11 +514,28 @@ button:disabled {
     to   { transform: scale(1) rotate(0deg); opacity: 1; }
 }
 
-/* Адаптив */
 @media (max-width: 768px) {
-    .love-reasons-page h1 { font-size: 7vw; }
-    .reasons-grid { grid-template-columns: repeat(5, 1fr); gap: 10px; }
-    .reason-btn.heart-btn { width: 50px; height: 50px; font-size: 1.5rem; }
-    .modal-content { padding: 40px 25px; }
-    #modalReasonText { font-size: 1.4rem; }
+    .love-reasons-page h1 {
+        font-size: 7vw;
+    }
+
+    .reasons-grid {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+        padding: 0 8px;
+    }
+
+    .reason-btn.heart-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+
+    .modal-content {
+        padding: 40px 25px;
+    }
+
+    #modalReasonText {
+        font-size: 1.4rem;
+    }
 }
