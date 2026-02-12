@@ -2,6 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Безмерная любовь</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -10,51 +11,100 @@
 <div class="book-wrapper">
     <div class="book">
 
-        <div class="page active">
+        <!-- 1 страница -->
+        <div class="page">
             <h1>Любовь длиною в жизнь</h1>
             <img src="images/5393591111542505675.jpg" class="photo">
-
             <p class="subtitle">Наша история</p>
         </div>
 
+        <!-- 2 страница -->
         <div class="page">
             <h2>Первая встреча</h2>
             <img src="images/Снимок экрана от 2026-02-12 21-13-01.png" class="photo">
-            <p>Я до сих пор помню этот день, этот взгляд полного вопросами, и я поняла — что-то изменилось, что наши души связаны впредь.</p>
-        </div>
-
-        <div class="page">
-            <img src="images/photo2.jpg" class="photo">
-            <h2>Твои глаза</h2>
             <p>
-                В них было больше, чем просто взгляд.  
-                В них была глубина,  
-                в которую хочется смотреть бесконечно.
+                Я до сих пор помню этот день, этот взгляд полный вопросами,
+                и я поняла — что-то изменилось,
+                что наши души связаны впредь.
             </p>
         </div>
 
+        <!-- 3 страница (ФОТОПЛЁНКА) -->
+        <div class="page">
+            <div class="memory-strip">
+
+                <div class="image-wrapper">
+                    <img src="images/5431728771863530492.jpg" class="memory-photo active">
+                    <img src="images/5280602157051136784.jpg" class="memory-photo">
+                    <img src="images/5380070017623772702.jpg" class="memory-photo">
+                    <img src="images/5280602157051136749.jpg" class="memory-photo">
+
+
+
+                    <button id="memoryNext" class="memory-btn">→</button>
+                </div>
+
+                <div class="memory-text">
+                    <h2 id="memoryTitle">Лучшие друзья</h2>
+                    <p id="memoryDesc">
+                        Всё началось с простого общения...
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="page">
+            <div class="wanderings">
+                <h2>И вдруг..</h2>
+                <p>
+                    Мы не заметили, как вдруг..<br>
+                    мир стал безмолвно глух,<br>
+                    и руки сомкнулись без чувств
+                </p>
+            </div>
+        </div>
+
+
+
+        <!-- 4 страница -->
         <div class="page">
             <img src="images/photo3.jpg" class="photo">
             <h2>Сегодня</h2>
             <p>
-                Я выбираю тебя.  
-                Снова и снова.  
+                Я выбираю тебя.<br>
+                Снова и снова.<br>
                 Каждый день.
             </p>
         </div>
 
+        <!-- 5 страница -->
         <div class="page final-page">
             <h1>Продолжим писать эту историю вместе?</h1>
-            <p>Это только начало нашей книги...</p>
+            <p id="finalText">
+                Это только начало нашей книги...
+            </p>
         </div>
 
+        <!-- Управление -->
         <div class="controls">
             <button id="prevBtn">Назад</button>
+            <span id="pageIndicator">1 / 5</span>
             <button id="nextBtn">Далее</button>
+        </div>
+
+        <!-- Кнопка музыки -->
+        <div class="music-control">
+            <button id="musicBtn">Музыка</button>
         </div>
 
     </div>
 </div>
+
+<!-- Аудио -->
+<audio id="pageSound" src="page-flip.mp3"></audio>
+<audio id="music" src="music.mp3" loop></audio>
 
 <script src="script.js"></script>
 </body>
