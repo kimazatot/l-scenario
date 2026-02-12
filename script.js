@@ -193,30 +193,46 @@ if (musicBtn && music) {
 }
 
 
-setInterval(() => {
+// В самом конце script.js замени setInterval на это:
 
-    const heart = document.createElement("div");
-    heart.className = "heart";
+function startHearts() {
+    const isMobile = window.innerWidth < 768;
+    const intervalMs = isMobile ? 900 : 500;     // реже на телефоне
+    const maxHeartsOnScreen = isMobile ? 12 : 25;
 
-    const size = 15 + Math.random() * 25;
-    heart.style.width = size + "px";
-    heart.style.height = size + "px";
+    setInterval(() => {
+        // Не создаём, если уже слишком много
+        if (document.querySelectorAll('.heart').length > maxHeartsOnScreen) return;
 
-    heart.style.position = "fixed";
-    heart.style.left     = Math.random() * 100 + "vw";
+        const heart = document.createElement("div");
+        heart.className = "heart";
 
-    heart.style.animationDuration = (5 + Math.random() * 7) + "s";
+        const size = isMobile 
+            ? 10 + Math.random() * 18 
+            : 14 + Math.random() * 24;
 
-    heart.innerHTML = `
-        <svg viewBox="0 0 24 24" width="100%" height="100%">
-            <path fill="#e25572"
-            d="M12 21s-6.7-4.35-9.33-7.97C-0.07 9.58 1.6 5.5 5.5 5.5c2.04 0 3.4 1.16 4.1 2.27C10.6 6.66 11.96 5.5 14 5.5c3.9 0 5.57 4.08 2.83 7.53C18.7 16.65 12 21 12 21z"/>
-        </svg>
-    `;
+        heart.style.width = size + "px";
+        heart.style.height = size + "px";
 
-    document.body.appendChild(heart);
+        heart.style.position = "fixed";
+        heart.style.left = Math.random() * 100 + "vw";
 
-    setTimeout(() => heart.remove(), 13000);
+        const duration = isMobile ? 4 + Math.random() * 5 : 6 + Math.random() * 7;
+        heart.style.animationDuration = duration + "s";
 
-}, 400);
+        // Случайная задержка появления
+        heart.style.animationDelay = Math.random() * 1.2 + "s";
 
+        heart.innerHTML = `<svg viewBox="0 0 24 24" width="100%" height="100%">
+            <path fill="#e25572" d="M12 21s-6.7-4.35-9.33-7.97C-0.07 9.58 1.6 5.5 5.5 5.5c2.04 0 3.4 1.16 4.1 2.27C10.6 6.66 11.96 5.5 14 5.5c3.9 0 5.57 4.08 2.83 7.53C18.7 16.65 12 21 12 21z"/>
+        </svg>`;
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), duration * 1100); // чуть больше длительности анимации
+
+    }, intervalMs);
+}
+
+// Запускаем только после загрузки страницы
+window.addEventListener('load', startHearts);

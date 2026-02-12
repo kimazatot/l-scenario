@@ -140,6 +140,7 @@ body {
     justify-content: center;
     height: 100%;
     gap: 25px;
+    -webkit-overflow-scrolling: touch;
 }
 
 .image-wrapper {
@@ -319,21 +320,95 @@ button:disabled {
    АДАПТИВ
 ===================================================== */
 
-@media (max-width: 900px) {
+/* Базовые улучшения для всех маленьких экранов */
+@media (max-width: 768px) {
+    body {
+        background: linear-gradient(135deg, #fdf6f6, #f9f3ef);
+        height: 100dvh;          /* лучше чем 100vh на мобильных */
+        overflow: hidden;
+    }
+
+    .book-wrapper {
+        perspective: 1800px;     /* меньше — меньше искажений на слабых устройствах */
+    }
 
     .book {
-        width: 95vw;
-        height: 90vh;
+        width: 94vw;
+        max-width: 420px;
+        height: 90dvh;
+        max-height: 780px;
+        border-radius: 14px;
+        box-shadow: 0 10px 30px rgba(180,150,150,0.18);
     }
 
     .page {
-        padding: 50px 40px;
+        padding: 6vw 7vw;        /* пропорциональные отступы */
     }
 
     .photo {
-        width: 250px;
+        width: 78%;
+        max-width: 280px;
+        margin: 4vw auto;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
     }
 
+    h1 { font-size: 8.5vw; margin-bottom: 4vw; }
+    h2 { font-size: 6.8vw; margin-bottom: 3.5vw; }
+    p  { font-size: 4.6vw; line-height: 1.75; }
+
+    .subtitle { font-size: 4.2vw; letter-spacing: 1.5px; }
+
+    .controls {
+        bottom: 2.5vw;
+    }
+
+    button {
+        padding: 10px 24px;
+        font-size: 3.8vw;
+        margin: 0 10px;
+    }
+
+    #pageIndicator { font-size: 3.8vw; }
+
+    .music-control {
+        top: 2vw;
+        right: 2vw;
+    }
+
+    .memory-strip {
+        gap: 20px;
+    }
+
+    .image-wrapper {
+        width: 82%;
+        max-width: 260px;
+        height: 65vw;
+        max-height: 340px;
+    }
+
+    .memory-btn {
+        width: 44px;
+        height: 44px;
+        font-size: 20px;
+    }
+}
+
+/* Очень маленькие экраны (iPhone SE, старые Android и т.д.) */
+@media (max-width: 380px) {
+    .book {
+        width: 96vw;
+    }
+
+    .page {
+        padding: 5vw 6vw;
+    }
+
+    h1 { font-size: 9vw; }
+    h2 { font-size: 7.2vw; }
+    p  { font-size: 4.8vw; }
+
+    .photo { width: 84%; }
 }
 
 .wanderings {
