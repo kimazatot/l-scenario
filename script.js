@@ -15,7 +15,7 @@ let currentPage = 0;
 
 
 // ======================================================
-// УСТАНОВКА Z-INDEX (один раз)
+// УСТАНОВКА Z-INDEX
 // ======================================================
 
 pages.forEach((page, i) => {
@@ -24,7 +24,7 @@ pages.forEach((page, i) => {
 
 
 // ======================================================
-// ОБНОВЛЕНИЕ ИНДИКАТОРА
+// ПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
 // ======================================================
 
 function updateIndicator() {
@@ -33,11 +33,6 @@ function updateIndicator() {
     }
 }
 
-
-// ======================================================
-// ЗВУК ПЕРЕЛИСТЫВАНИЯ
-// ======================================================
-
 function playFlip() {
     if (pageSound) {
         pageSound.currentTime = 0;
@@ -45,13 +40,7 @@ function playFlip() {
     }
 }
 
-
-// ======================================================
-// ПЕРЕЛИСТЫВАНИЕ
-// ======================================================
-
 function showPage(index) {
-
     pages.forEach((page, i) => {
         if (i < index) {
             page.classList.add("flipped");
@@ -60,17 +49,12 @@ function showPage(index) {
         }
     });
 
-    if (bookNextBtn) {
-        bookNextBtn.disabled = index === pages.length - 1;
-    }
-
-    if (bookPrevBtn) {
-        bookPrevBtn.disabled = index === 0;
-    }
+    if (bookNextBtn) bookNextBtn.disabled = index === pages.length - 1;
+    if (bookPrevBtn) bookPrevBtn.disabled = index === 0;
 
     updateIndicator();
 
-    // Печатающийся финал
+    // Печатающийся текст на последней странице
     if (index === pages.length - 1) {
         const finalText = document.getElementById("finalText");
         if (finalText && !finalText.dataset.typed) {
@@ -80,9 +64,23 @@ function showPage(index) {
     }
 }
 
+function typeText(element, text, speed = 35) {
+    let i = 0;
+    element.textContent = "";
+
+    const interval = setInterval(() => {
+        if (i < text.length) {
+            element.textContent += text[i];
+            i++;
+        } else {
+            clearInterval(interval);
+        }
+    }, speed);
+}
+
 
 // ======================================================
-// КНОПКИ
+// НАВИГАЦИЯ ПО КНИГЕ
 // ======================================================
 
 if (bookNextBtn) {
@@ -107,70 +105,45 @@ if (bookPrevBtn) {
 
 
 // ======================================================
-// ФОТОПЛЁНКА
+// ФОТОПЛЁНКА — переключение по клику на фото
 // ======================================================
 
 const photos = document.querySelectorAll(".memory-photo");
-const memoryNextBtn = document.getElementById("memoryNext");
 const memoryTitle = document.getElementById("memoryTitle");
 const memoryDesc = document.getElementById("memoryDesc");
 
 const memories = [
-    {
-        title: "Лучшие друзья",
-        text: "Всё началось с простого общения..."
-    },
-    {
-        title: "Первый смех",
-        text: "Мы смеялись так, будто знали друг друга всю жизнь."
-    },
-    {
-        title: "Первые прогулки",
-        text: "Тёплый вечер и ощущение, что мир стал другим."
-    },
-    {
-        title: "Нечто большее",
-        text: "И тогда я поняла — это уже не просто дружба."
-    }
+    { title: "Лучшие друзья",          text: "Всё началось с простого общения..." },
+    { title: "Первый смех",            text: "Мы смеялись так, будто знали друг друга всю жизнь." },
+    { title: "Первые прогулки",        text: "Тёплый вечер и ощущение, что мир стал другим." },
+    { title: "Нечто большее",          text: "И тогда я поняла — это уже не просто дружба." }
 ];
 
 let currentMemory = 0;
 
-if (memoryNextBtn && photos.length > 0) {
+function updateMemoryDisplay() {
+    if (photos.length === 0) return;
 
-    memoryNextBtn.addEventListener("click", () => {
-
-        photos[currentMemory].classList.remove("active");
-
-        currentMemory++;
-        if (currentMemory >= photos.length) {
-            currentMemory = 0;
-        }
-
-        photos[currentMemory].classList.add("active");
-
-        if (memories[currentMemory]) {
-            memoryTitle.textContent = memories[currentMemory].title;
-            memoryDesc.textContent = memories[currentMemory].text;
-        }
+    photos.forEach((photo, i) => {
+        photo.classList.toggle("active", i === currentMemory);
     });
+
+    if (memories[currentMemory]) {
+        memoryTitle.textContent = memories[currentMemory].title;
+        memoryDesc.textContent = memories[currentMemory].text;
+    }
 }
 
+const imageWrapper = document.querySelector(".image-wrapper");
 
-// ======================================================
-// ПЕЧАТАЮЩИЙСЯ ТЕКСТ
-// ======================================================
+if (imageWrapper && photos.length > 0) {
+    // Показываем первое фото сразу
+    updateMemoryDisplay();
 
-function typeText(element, text, speed = 35) {
-
-    let i = 0;
-    element.textContent = "";
-
-    const interval = setInterval(() => {
-        element.textContent += text[i];
-        i++;
-        if (i >= text.length) clearInterval(interval);
-    }, speed);
+    imageWrapper.addEventListener("click", () => {
+        currentMemory = (currentMemory + 1) % photos.length;
+        updateMemoryDisplay();
+    });
 }
 
 
@@ -179,9 +152,7 @@ function typeText(element, text, speed = 35) {
 // ======================================================
 
 if (musicBtn && music) {
-
     musicBtn.addEventListener("click", () => {
-
         if (music.paused) {
             music.play().catch(() => {});
             musicBtn.textContent = "Пауза";
@@ -193,46 +164,43 @@ if (musicBtn && music) {
 }
 
 
-// В самом конце script.js замени setInterval на это:
-
+// ======================================================
 function startHearts() {
-    const isMobile = window.innerWidth < 768;
-    const intervalMs = isMobile ? 900 : 500;     // реже на телефоне
-    const maxHeartsOnScreen = isMobile ? 12 : 25;
+    console.log("startHearts запущена"); // ← должно появиться в консоли!
+
+    const intervalMs = window.innerWidth < 768 ? 1200 : 600;
 
     setInterval(() => {
-        // Не создаём, если уже слишком много
-        if (document.querySelectorAll('.heart').length > maxHeartsOnScreen) return;
+        console.log("Создаю новое сердечко"); // ← каждые 600–1200 мс
 
         const heart = document.createElement("div");
         heart.className = "heart";
 
-        const size = isMobile 
-            ? 10 + Math.random() * 18 
-            : 14 + Math.random() * 24;
-
+        const size = 18 + Math.random() * 22;
         heart.style.width = size + "px";
         heart.style.height = size + "px";
 
-        heart.style.position = "fixed";
-        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.left = (Math.random() * 90 + 5) + "vw"; // чуть отступ от краёв
 
-        const duration = isMobile ? 4 + Math.random() * 5 : 6 + Math.random() * 7;
-        heart.style.animationDuration = duration + "s";
-
-        // Случайная задержка появления
-        heart.style.animationDelay = Math.random() * 1.2 + "s";
+        const duration = 5 + Math.random() * 6;
+        heart.style.animation = `fall ${duration}s linear forwards`;
 
         heart.innerHTML = `<svg viewBox="0 0 24 24" width="100%" height="100%">
-            <path fill="#e25572" d="M12 21s-6.7-4.35-9.33-7.97C-0.07 9.58 1.6 5.5 5.5 5.5c2.04 0 3.4 1.16 4.1 2.27C10.6 6.66 11.96 5.5 14 5.5c3.9 0 5.57 4.08 2.83 7.53C18.7 16.65 12 21 12 21z"/>
+            <path fill="#ff4d6d" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
         </svg>`;
 
         document.body.appendChild(heart);
 
-        setTimeout(() => heart.remove(), duration * 1100); // чуть больше длительности анимации
+        setTimeout(() => {
+            heart.remove();
+            console.log("Сердечко удалено");
+        }, duration * 1000 + 500);
 
     }, intervalMs);
 }
 
-// Запускаем только после загрузки страницы
-window.addEventListener('load', startHearts);
+// Запуск
+window.addEventListener('load', () => {
+    console.log("Страница загружена, запускаем сердечки");
+    startHearts();
+});
