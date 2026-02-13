@@ -528,3 +528,47 @@ body {
     }
 }
 
+.final-buttons {
+    margin-top: 30px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    position: relative; /* для корректного расположения Да/Нет */
+}
+
+.final-buttons button {
+    padding: 12px 28px;
+    font-size: 18px;
+    border-radius: 40px;
+    border: none;
+    background: #d8a5b0;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.final-buttons button:hover {
+    background: #c98795;
+}
+
+/* Финальная модалка */
+#finalModal .modal-content {
+    background: #fffdf9;
+    color: #7a5c63;
+    padding: 20px 30px;  /* уменьшили паддинги */
+    border-radius: 20px;
+    width: 90%;
+    max-width: 350px;    /* уменьшили ширину */
+    max-height: 80vh;
+    overflow-y: auto;
+    text-align: center;
+    box-shadow: 0 15px 50px rgba(200,100,120,0.35);
+    position: relative;
+}
+
+#finalModal img {
+    width: 100%;          /* фотка занимает максимум модалки */
+    max-width: 280px;     /* ограничиваем размер */
+    border-radius: 12px;
+    margin: 15px 0;
+}

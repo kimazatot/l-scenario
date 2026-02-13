@@ -359,3 +359,38 @@ if (letterModal) {
         }
     });
 }
+
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const finalModal = document.getElementById("finalModal");
+const modalClose = finalModal.querySelector(".modal-close");
+
+// Да — открыть модалку
+yesBtn.addEventListener("click", () => {
+    finalModal.classList.add("active");
+});
+
+// Закрыть модалку
+modalClose.addEventListener("click", () => {
+    finalModal.classList.remove("active");
+});
+
+// Нет — убегает по всей странице при наведении
+// Убегает на ПК
+noBtn.addEventListener("mouseover", moveNoBtn);
+
+// Убегает на мобильных при касании
+noBtn.addEventListener("touchstart", moveNoBtn);
+
+function moveNoBtn() {
+    const pageWidth = window.innerWidth - noBtn.offsetWidth;
+    const pageHeight = window.innerHeight - noBtn.offsetHeight;
+
+    const randomX = Math.random() * pageWidth;
+    const randomY = Math.random() * pageHeight;
+
+    noBtn.style.position = "absolute";
+    noBtn.style.left = `${randomX}px`;
+    noBtn.style.top = `${randomY}px`;
+}
+
