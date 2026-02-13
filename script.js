@@ -148,7 +148,7 @@ const memoryTitleNew = document.getElementById("memoryTitleNew");
 const memoryDescNew  = document.getElementById("memoryDescNew");
 
 const memoriesNew = [
-    { title: "Возвращение",          text: "О чудо — вернулись мы вновь..." },
+    { title: "Возвращение",          text: "О чудо — вместе мы вновь" },
     { title: "Сквозь молчание",      text: "Годы тишины только усилили чувства." },
     { title: "Ближе прежнего",       text: "Мы стали тише, но связь крепче." },
     { title: "Осенний взгляд",       text: "Твой взгляд говорит больше слов." },

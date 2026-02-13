@@ -506,3 +506,23 @@ button:disabled {
         min-height: 90vh;
     }
 }
+
+.poetic-mystery {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.mysterious-veil {
+    max-width: 650px;
+    width: 100%;
+}
+
+.subtle-photo {
+    display: block;
+    margin: 30px auto 0 auto;
+    max-width: 70%;
+    height: auto;
+    border-radius: 14px;
+}
