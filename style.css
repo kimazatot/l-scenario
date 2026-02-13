@@ -14,12 +14,19 @@ html, body {
 
 body {
     font-family: 'Georgia', serif;
-    background: linear-gradient(135deg, #fdf6f6, #f9f3ef);
+    background: radial-gradient(
+        circle at top,
+        #ebd3d9 0%,
+        #ebd3d9 40%,
+        #ebd3d9 100%
+    );
     min-height: 100dvh;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    padding: 40px 0 140px 0;
 }
+
 
 /* =====================================================
    BOOK WRAPPER
@@ -40,15 +47,17 @@ body {
 ===================================================== */
 .book {
     width: min(90vw, 850px);
-    aspect-ratio: 850 / 620;
     position: relative;
     background: #fffdf9;
     border-radius: 20px;
     box-shadow: 0 20px 50px rgba(180,150,150,0.25),
                 inset 0 0 30px rgba(0,0,0,0.03);
-    overflow: hidden;
     transform-style: preserve-3d;
+
+    height: auto;
+    min-height: 620px; /* если хочешь минимальную высоту */
 }
+
 
 .book::after {
     content: "";
@@ -76,6 +85,11 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    min-height: auto;
 }
 
 .centered-page {
@@ -147,13 +161,13 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100%;
+    height: auto;
     gap: 25px;
 }
 
 .image-wrapper {
     position: relative;
-    width: min(70%, 320px);
+    width: min(85%, 400px);
     aspect-ratio: 3 / 4;
     cursor: pointer;
 }
@@ -382,18 +396,23 @@ body {
         #fdf6f6
     ) !important;
     color: #c47b8b; /* тёплый текст */
+    justify-content: flex-start; /* текст сверху */
+    padding-top: 60px;
 }
 
 .mysterious-veil,
 .poem-block {
     max-width: 80%;
     margin: 0 auto;
-    padding: rem;
-    background: rgba(255, 253, 249, 0.8); /* светлый фон, прозрачность для глубины */
+    padding: 2rem;
+    background: rgba(255, 240, 245, 0.7);
     border-radius: 18px;
-    border: 1px solid rgba(200, 150, 150, 0.15); /* светлая рамка */
+    border: 1px solid rgba(200, 120, 150, 0.25);
     backdrop-filter: blur(6px);
+    word-break: break-word;
+
 }
+
 
 .poetic {
     color: #a17171; /* текст в тёплый коричневый */
@@ -406,13 +425,13 @@ body {
 
 
 .fade-in-delay {
-    animation: fadeIn 4s ease-in forwards;
-    animation-delay: 2s;
-    opacity: 0;
+    opacity: 1;
+    animation: fadeIn 2s ease-in forwards;
 }
 
 @keyframes fadeIn {
-    to { opacity: 1; }
+    from { opacity: 0.3; }
+    to   { opacity: 1; }
 }
 
 .hidden-line {
@@ -508,3 +527,4 @@ body {
         min-height: 90vh;
     }
 }
+
