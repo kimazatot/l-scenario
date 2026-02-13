@@ -51,6 +51,7 @@
             </div>
         </div>
 
+        <!-- Поэтическая страница 1 -->
         <div class="page centered-page poetic-mystery">
             <div class="mysterious-veil">
                 <h2>…и время тихо перестало быть прежним</h2>
@@ -69,11 +70,9 @@
                     а любовь — осталась.
                 </p>
                 
-                <img src="images/Снимок экрана от 2026-02-13 18-48-32.png"
-                    class="subtle-photo" >
+                <img src="images/Снимок экрана от 2026-02-13 18-48-32.png" class="subtle-photo" alt="">
             </div>
         </div>
-
 
         <!-- Страница 4 -->
         <div class="page centered-page">
@@ -125,11 +124,10 @@
             </div>
         </div>
 
-        <!-- Страница 7 (Love Reasons) -->
+        <!-- Страница 7 — Причины любви -->
         <div class="page love-reasons-page">
             <h1>А знаешь,<br>за что я тебя люблю?</h1>
-
-             <div class="reasons-grid">
+            <div class="reasons-grid">
                 <button class="reason-btn" data-reason="0">♥</button>
                 <button class="reason-btn" data-reason="1">♥</button>
                 <button class="reason-btn" data-reason="2">♥</button>
@@ -183,7 +181,40 @@
             </div>
         </div>
 
-        <!-- Страница 8 (Финал) -->
+        <!-- Поэтическая страница 2 -->
+        <div class="page centered-page poetic-mystery">
+            <h2>Как падает снег в темноте</h2>
+            <div class="poem-block">
+                <p>
+                    Медленно.<br>
+                    Беззвучно.<br>
+                    Не спрашивая разрешения.<br>
+                    Так же тихо я влюбилась.<br>
+                    Не объявила.<br>
+                    Не призналась даже себе.<br>
+                    Просто однажды поняла —<br>
+                    что все дороги теперь ведут к тебе.
+                </p>
+            </div>
+            <p class="hidden-line reveal-on-scroll">
+                …и я до сих пор не знаю,<br>
+                заметил ли ты этот миг.
+            </p>
+        </div>
+
+        <!-- Страница письма -->
+        <div class="page centered-page letter-page">
+            <div class="letter-preview" id="letterPreview">
+                <h2>Моё письмо к тебе</h2>
+                <p>
+                    Я написала его не сразу.<br>
+                    Некоторые слова долго не решались появиться…
+                </p>
+                <span class="letter-hint">(нажми, чтобы открыть)</span>
+            </div>
+        </div>
+
+        <!-- Финальная страница -->
         <div class="page final-page centered-page">
             <h1>Продолжим писать эту книгу вместе?</h1>
             <p id="finalText">
@@ -191,28 +222,61 @@
             </p>
         </div>
 
-        <!-- Управление -->
-        <div class="controls">
-            <button id="prevBtn">Назад</button>
-            <span id="pageIndicator">1 / 8</span>
-            <button id="nextBtn">Далее</button>
-        </div>
-
-        <!-- Музыка -->
+        <!-- Музыка (оставляем внутри книги) -->
         <div class="music-control">
             <button id="musicBtn">Музыка</button>
         </div>
 
-    </div>
-</div>
+    </div> <!-- конец .book -->
 
-<!-- Модальное окно вне книги -->
-<div id="reasonModal" class="reason-modal">
-    <div class="modal-content">
-        <button class="modal-close">×</button>
-        <p id="modalReasonText"></p>
+    <!-- Управление — ТОЛЬКО ОДИН блок, фиксированный -->
+    <div class="controls">
+        <button id="prevBtn">Назад</button>
+        <span id="pageIndicator"></span>
+        <button id="nextBtn">Далее</button>
     </div>
-</div>
+
+    <!-- Модальное окно письма -->
+    <div id="letterModal" class="letter-modal">
+        <div class="letter-content">
+            <button class="letter-close">×</button>
+            <h2>Моё настоящее письмо</h2>
+            <p>
+                Если однажды мы перечитаем это спустя годы,<br><br>
+
+                я хочу помнить не идеальность.<br>
+                Не громкие слова и не красивые обещания.<br>
+                А тишину между нами, которая всегда была живой.<br><br>
+
+                Я хочу помнить,<br>
+                как мы выбирали друг друга<br>
+                не тогда, когда было легко,<br>
+                а тогда, когда было страшно.<br><br>
+
+                Когда сомнения были громче чувств,<br>
+                когда прошлое пыталось удержать,<br>
+                когда будущее казалось туманом.<br><br>
+
+                И всё равно —<br>
+                мы оставались.<br><br>
+
+                Если любовь — это решение,<br>
+                то я принимаю его снова.<br>
+                Каждый день.<br>
+                С тобой.
+            </p>
+        </div>
+    </div>
+
+    <!-- Модальное окно причин -->
+    <div id="reasonModal" class="reason-modal">
+        <div class="modal-content">
+            <button class="modal-close">×</button>
+            <p id="modalReasonText"></p>
+        </div>
+    </div>
+
+</div> <!-- конец .book-wrapper -->
 
 <!-- Аудио -->
 <audio id="music" src="audio/Winter_Aid_-_The_Wisp_Sings_(Bib.fm).mp3" loop preload="auto"></audio>

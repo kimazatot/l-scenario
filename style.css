@@ -8,7 +8,8 @@
 }
 
 html, body {
-    overflow-x: clip;
+    overflow-x: hidden;
+    height: 100%;
 }
 
 body {
@@ -26,13 +27,16 @@ body {
 .book-wrapper {
     perspective: 2500px;
     width: 100%;
+    max-width: 100vw;
     display: flex;
-    justify-content: center;
-    padding: 40px 20px;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px 120px 20px; /* место под фиксированные кнопки */
+    position: relative;
 }
 
 /* =====================================================
-   BOOK (АДАПТИВНАЯ ГЕОМЕТРИЯ)
+   BOOK
 ===================================================== */
 .book {
     width: min(90vw, 850px);
@@ -40,9 +44,8 @@ body {
     position: relative;
     background: #fffdf9;
     border-radius: 20px;
-    box-shadow:
-        0 20px 50px rgba(180,150,150,0.25),
-        inset 0 0 30px rgba(0,0,0,0.03);
+    box-shadow: 0 20px 50px rgba(180,150,150,0.25),
+                inset 0 0 30px rgba(0,0,0,0.03);
     overflow: hidden;
     transform-style: preserve-3d;
 }
@@ -65,12 +68,11 @@ body {
     position: absolute;
     inset: 0;
     padding: clamp(30px, 6vw, 90px) clamp(25px, 6vw, 100px);
-    background: #fffdf9;
+    background: #fffdf9 !important;
     transform-origin: left center;
     backface-visibility: hidden;
-    transition: transform 0.9s cubic-bezier(.65,.05,.36,1);
+    transition: transform 0.9s cubic-bezier(0.65, 0.05, 0.36, 1);
     overflow-y: auto;
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -79,8 +81,6 @@ body {
 .centered-page {
     justify-content: center;
 }
-
-
 
 .page.flipped {
     transform: rotateY(-180deg);
@@ -120,10 +120,13 @@ body {
 }
 
 /* =====================================================
-   PHOTO
+   PHOTO & IMAGES
 ===================================================== */
-.photo {
+.photo,
+.subtle-photo {
     width: min(70%, 320px);
+    max-height: 60vh;
+    object-fit: cover;
     border-radius: 18px;
     display: block;
     margin: 30px auto;
@@ -131,7 +134,8 @@ body {
     transition: transform 0.5s ease;
 }
 
-.photo:hover {
+.photo:hover,
+.subtle-photo:hover {
     transform: scale(1.04);
 }
 
@@ -170,19 +174,25 @@ body {
 }
 
 /* =====================================================
-   NAV CONTROLS
+   NAV CONTROLS — фиксированные, без дубликатов
 ===================================================== */
 .controls {
-    position: absolute;
+    position: fixed;
     bottom: 20px;
-    width: 100%;
-    text-align: center;
-    z-index: 10;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    padding: 15px 20px;
+    backdrop-filter: blur(10px);
+    z-index: 200;
+    border-top: 1px solid rgba(200, 180, 255, 0.12);
 }
 
-button {
+.controls button {
     padding: 12px 32px;
-    margin: 0 20px;
     border: none;
     border-radius: 40px;
     background: #d8a5b0;
@@ -192,49 +202,33 @@ button {
     transition: all 0.3s ease;
 }
 
-button:hover {
+.controls button:hover {
     background: #c98795;
     transform: translateY(-2px);
 }
 
-button:disabled {
-    opacity: 0.4;
+.controls button:disabled {
+    opacity: 0.5;
     cursor: not-allowed;
+    transform: none;
 }
 
 #pageIndicator {
-    font-size: 16px;
+    font-size: 17px;
+    font-weight: 500;
     color: #a67884;
-}
-
-/* =====================================================
-   FINAL PAGE
-===================================================== */
-.final-page {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    min-width: 80px;
     text-align: center;
-}
-
-.final-page h1 {
-    font-size: clamp(2rem, 4vw, 44px);
-    color: #d17b94;
-}
-
-.final-page p {
-    font-size: clamp(1rem, 2vw, 22px);
-    margin-top: 15px;
 }
 
 /* =====================================================
    MUSIC BUTTON
 ===================================================== */
 .music-control {
-    position: absolute;
+    position: fixed;
     top: 20px;
     right: 20px;
-    z-index: 100;
+    z-index: 150;
 }
 
 #musicBtn {
@@ -252,25 +246,26 @@ button:disabled {
     background: #c98795;
 }
 
-#musicBtn.playing {
-    background: #ff6b81;
+/* =====================================================
+   Другие страницы и элементы (без изменений)
+===================================================== */
+.final-page {
+    text-align: center;
 }
 
-/* =====================================================
-   LOVE REASONS PAGE
-===================================================== */
-.love-reasons-page {
-    /* display: flex; */
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding-top: 40px;
-    min-height: auto;
-    position: relative;
-    z-index: 2;
-    margin-top: 10px;
-    height: 100%;
+.final-page h1 {
+    font-size: clamp(2rem, 4vw, 44px);
+    color: #d17b94;
+}
 
+.final-page p {
+    font-size: clamp(1rem, 2vw, 22px);
+    margin-top: 15px;
+}
+
+.love-reasons-page {
+    padding-top: 40px;
+    text-align: center;
 }
 
 .reasons-grid {
@@ -298,30 +293,33 @@ button:disabled {
     justify-content: center;
 }
 
-.reason-btn:hover {
-    transform: scale(1.1);
+.reason-btn:hover,
+.reason-btn.clicked {
+    transform: scale(1.15);
+    background: #ffe4e9;
 }
 
-/* =====================================================
-   MODAL
-===================================================== */
-.reason-modal {
-    display: none;
+.reason-modal,
+.letter-modal {
     position: fixed;
     inset: 0;
     background: rgba(0,0,0,0.65);
     backdrop-filter: blur(5px);
     z-index: 10000;
+    display: none;
     align-items: center;
     justify-content: center;
 }
 
-.reason-modal.active {
+.reason-modal.active,
+.letter-modal.active {
     display: flex;
 }
 
-.modal-content {
+.modal-content,
+.letter-content {
     background: #fffdf9;
+    color: #7a5c63;
     padding: 40px;
     border-radius: 24px;
     width: 90%;
@@ -329,139 +327,159 @@ button:disabled {
     max-height: 85vh;
     overflow-y: auto;
     box-shadow: 0 20px 70px rgba(200,100,120,0.45);
+    position: relative;
 }
 
-#modalReasonText {
-    font-size: 1.4rem;
-    line-height: 1.6;
+.letter-content {
+    background: #d17b94;
+    color: #e0e0ff;
+}
+
+.letter-close,
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: inherit;
+}
+
+.letter-page {
     text-align: center;
-    color: #4a3c3c;
+    cursor: pointer;
+}
+
+.letter-preview {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background: rgba(255, 240, 245, 0.6);
+    border-radius: 20px;
+    border: 2px dashed #ffb6c1;
+    transition: all 0.4s ease;
+}
+
+.letter-preview:hover {
+    background: rgba(255, 240, 245, 0.9);
+    transform: scale(1.02);
+}
+
+.letter-hint {
+    font-style: italic;
+    color: #c47b8b;
+    margin-top: 15px;
+    display: block;
+}
+
+.poetic-mystery {
+    background: linear-gradient(
+        to bottom,
+        #fffdf9,
+        #f9f3ef,
+        #fdf6f6
+    ) !important;
+    color: #c47b8b; /* тёплый текст */
+}
+
+.mysterious-veil,
+.poem-block {
+    max-width: 80%;
+    margin: 0 auto;
+    padding: rem;
+    background: rgba(255, 253, 249, 0.8); /* светлый фон, прозрачность для глубины */
+    border-radius: 18px;
+    border: 1px solid rgba(200, 150, 150, 0.15); /* светлая рамка */
+    backdrop-filter: blur(6px);
+}
+
+.poetic {
+    color: #a17171; /* текст в тёплый коричневый */
+}
+
+.small-note,
+.tiny-note {
+    color: #7a5c63;
+}
+
+
+.fade-in-delay {
+    animation: fadeIn 4s ease-in forwards;
+    animation-delay: 2s;
+    opacity: 0;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+.hidden-line {
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+}
+
+.hidden-line.reveal-on-scroll {
+    opacity: 1;
 }
 
 /* =====================================================
-   MOBILE
+   FALLING HEARTS
 ===================================================== */
-@media (max-width: 768px) {
-
-    body {
-        align-items: flex-start;
-    }
-
-    .book-wrapper {
-        padding: 20px 10px;
-    }
-
-    .book {
-        width: 95vw;
-    }
-
-    .controls {
-        bottom: 10px;
-    }
-
-    button {
-        padding: 10px 20px;
-        margin: 0 10px;
-        font-size: 14px;
-    }
-
-    .reason-btn {
-        width: 55px;
-        height: 55px;
-        font-size: 1.5rem;
-    }
-}
-
 .heart {
     position: fixed;
     top: -60px;
-    left: 0;
     pointer-events: none;
     z-index: 9999;
-    animation: fall linear forwards;
 }
 
 @keyframes fall {
-    from {
-        transform: translateY(0) rotate(0deg);
-        opacity: 1;
-    }
-    to {
-        transform: translateY(110vh) rotate(720deg);
-        opacity: 0;
-    }
+    from { transform: translateY(0) rotate(0deg); opacity: 1; }
+    to   { transform: translateY(110vh) rotate(720deg); opacity: 0; }
 }
 
 /* =====================================================
-   MOBILE REFINED
+   MEDIA QUERIES
 ===================================================== */
 @media (max-width: 768px) {
-
-    /* ---------------------------------
-       Общая структура
-    --------------------------------- */
     body {
         align-items: flex-start;
-        padding: 20px 0;
+        padding: 20px 0 140px 0;
     }
 
     .book-wrapper {
         padding: 10px;
     }
 
-    /* ---------------------------------
-       Книга становится вертикальной
-    --------------------------------- */
     .book {
         width: 100%;
-        aspect-ratio: 3 / 4; /* вместо горизонтального */
+        aspect-ratio: 3 / 4;
         border-radius: 16px;
     }
 
-    /* Убираем боковую "тень переплета" */
-    .book::after {
-        display: none;
-    }
+    .book::after { display: none; }
 
-    /* ---------------------------------
-       Страницы
-    --------------------------------- */
     .page {
-        padding: 30px 20px 80px 20px; /* добавили место под кнопки */
+        padding: 30px 20px 140px 20px;
     }
 
-    /* ---------------------------------
-       Фото
-    --------------------------------- */
-    .photo,
-    .image-wrapper {
+    .photo, .image-wrapper, .subtle-photo {
         width: 85%;
         max-width: 280px;
     }
 
-    /* ---------------------------------
-       Контролы
-    --------------------------------- */
     .controls {
-        position: fixed;
         bottom: 10px;
-        left: 0;
-        width: 100%;
-        background: rgba(255,253,249,0.95);
-        padding: 10px 0;
-        backdrop-filter: blur(4px);
+        padding: 12px 10px;
+        gap: 12px;
     }
 
-    button {
-        padding: 12px 18px;
-        margin: 0 6px;
-        font-size: 14px;
-        min-height: 44px;
+    .controls button {
+        padding: 10px 24px;
+        font-size: 15px;
     }
 
-    /* ---------------------------------
-       Reasons grid
-    --------------------------------- */
     .reasons-grid {
         grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
         gap: 14px;
@@ -473,21 +491,6 @@ button:disabled {
         font-size: 1.3rem;
     }
 
-    /* ---------------------------------
-       Modal
-    --------------------------------- */
-    .modal-content {
-        padding: 25px;
-        border-radius: 18px;
-    }
-
-    #modalReasonText {
-        font-size: 1.1rem;
-    }
-
-    /* ---------------------------------
-       Музыка
-    --------------------------------- */
     .music-control {
         top: 10px;
         right: 10px;
@@ -497,7 +500,6 @@ button:disabled {
         padding: 8px 16px;
         font-size: 13px;
     }
-
 }
 
 @media (max-width: 480px) {
@@ -505,24 +507,4 @@ button:disabled {
         aspect-ratio: auto;
         min-height: 90vh;
     }
-}
-
-.poetic-mystery {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-.mysterious-veil {
-    max-width: 650px;
-    width: 100%;
-}
-
-.subtle-photo {
-    display: block;
-    margin: 30px auto 0 auto;
-    max-width: 70%;
-    height: auto;
-    border-radius: 14px;
 }
